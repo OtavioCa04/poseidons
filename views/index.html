@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidons - Sistema de Clientes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <span class="navbar-title">Poseidons</span>
+            </div>
+            <ul class="navbar-menu">
+                <li class="navbar-item active">
+                    <a href="index.html" class="navbar-link">
+                        Clientes
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="produtos.html" class="navbar-link">
+                        Produtos
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="pedidos.html" class="navbar-link">
+                        Pedidos
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Gestão de Clientes</h1>
+            <p>Sistema de Gerenciamento de Clientes</p>
+        </header>
+
+        <main class="main-content">
+            <button id="btnNovo" class="btn-primary">
+                <span class="btn-icon">+</span>
+                Cadastrar Cliente
+            </button>
+
+            <div id="overlay" class="overlay"></div>
+
+            <div id="formCliente" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Novo Cliente</h2>
+                        <button class="close-btn" id="closeForm">&times;</button>
+                    </div>
+                    <form id="clienteForm" class="form">
+                        <!-- Seção: Dados Principais -->
+                        <div class="form-section">
+                            <h3 class="section-heading">Dados Principais</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Loja <span class="required">*</span></label>
+                                    <input type="text" name="loja" placeholder="Ex: 01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tipo <span class="required">*</span></label>
+                                    <input type="text" name="tipo" placeholder="Ex: F (Física) ou J (Jurídica)" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Razão Social <span class="required">*</span></label>
+                                    <input type="text" name="razao" placeholder="Razão social completa da empresa" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Nome Fantasia <span class="required">*</span></label>
+                                    <input type="text" name="nomefantasia" placeholder="Nome fantasia ou nome do cliente" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">CNPJ / CPF</label>
+                                    <input type="text" name="cnpj" placeholder="00.000.000/0000-00">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Finalidade</label>
+                                    <input type="text" name="finalidade" placeholder="Ex: Comercial, Residencial">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Endereço</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">CEP</label>
+                                    <input type="text" name="cep" placeholder="00000-000">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">País</label>
+                                    <input type="text" name="pais" placeholder="Brasil" value="Brasil">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Estado <span class="required">*</span></label>
+                                    <input type="text" name="estado" placeholder="Ex: SP" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Código Município</label>
+                                    <input type="text" name="codmunicipio" placeholder="Ex: 3550308">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Cidade <span class="required">*</span></label>
+                                    <input type="text" name="cidade" placeholder="Nome da cidade" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-large">
+                                    <label class="form-label">Endereço</label>
+                                    <input type="text" name="endereco" placeholder="Rua, Avenida, Número">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bairro</label>
+                                    <input type="text" name="bairro" placeholder="Bairro">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Contato</h3>
+                            <div class="form-row">
+                                <div class="form-group form-group-small">
+                                    <label class="form-label">DDD</label>
+                                    <input type="text" name="ddd" placeholder="11" maxlength="3">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telefone <span class="required">*</span></label>
+                                    <input type="text" name="telefone" placeholder="00000-0000" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Data de Abertura</label>
+                                    <input type="date" name="abertura">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Nome do Contato</label>
+                                    <input type="text" name="contato" placeholder="Nome do responsável">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="email" name="email" placeholder="contato@empresa.com">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Homepage / Website</label>
+                                    <input type="text" name="homepage" placeholder="https://www.empresa.com.br">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <p class="required-note">* Campos obrigatórios</p>
+                            <button type="submit" class="btn-submit">
+                                Cadastrar Cliente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modalViewCliente" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Detalhes do Cliente</h2>
+                        <button class="close-btn" id="closeViewModal">&times;</button>
+                    </div>
+                    <div id="viewContent" class="view-content">
+                        <!-- Aqui serão preenchidos os dados via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEditCliente" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Editar Dados do Cliente</h2>
+                        <button class="close-btn" id="closeEditModal">&times;</button>
+                    </div>
+                    <form id="editClienteForm" class="form">
+                        <!-- Seção: Código -->
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Código:</label>
+                                    <input type="text" name="codigo" readonly class="readonly-field">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Dados Principais</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Loja <span class="required">*</span></label>
+                                    <input type="text" name="loja" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tipo <span class="required">*</span></label>
+                                    <input type="text" name="tipo" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Razão Social <span class="required">*</span></label>
+                                    <input type="text" name="razao" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Nome Fantasia <span class="required">*</span></label>
+                                    <input type="text" name="nomefantasia" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">CNPJ / CPF</label>
+                                    <input type="text" name="cnpj">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Finalidade</label>
+                                    <input type="text" name="finalidade">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Endereço</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">CEP</label>
+                                    <input type="text" name="cep">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">País</label>
+                                    <input type="text" name="pais">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Estado <span class="required">*</span></label>
+                                    <input type="text" name="estado" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Código Município</label>
+                                    <input type="text" name="codmunicipio">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Cidade <span class="required">*</span></label>
+                                    <input type="text" name="cidade" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-large">
+                                    <label class="form-label">Endereço</label>
+                                    <input type="text" name="endereco">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bairro</label>
+                                    <input type="text" name="bairro">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Contato</h3>
+                            <div class="form-row">
+                                <div class="form-group form-group-small">
+                                    <label class="form-label">DDD</label>
+                                    <input type="text" name="ddd" maxlength="3">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telefone <span class="required">*</span></label>
+                                    <input type="text" name="telefone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Data de Abertura</label>
+                                    <input type="date" name="abertura">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Nome do Contato</label>
+                                    <input type="text" name="contato">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">E-mail</label>
+                                    <input type="email" name="email">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Homepage / Website</label>
+                                    <input type="text" name="homepage">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <p class="required-note">* Campos obrigatórios</p>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    Atualizar Cliente
+                                </button>
+                                <button type="button" class="btn-cancel-form">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modalConfirmDelete" class="modal">
+                <div class="modal-content modal-confirm">
+                    <div class="modal-header">
+                        <h2>Confirmar Exclusão</h2>
+                        <button class="close-btn" id="closeConfirmModal">&times;</button>
+                    </div>
+                    <div id="confirmContent" class="confirm-content">
+                        <!-- Dados do cliente serão preenchidos via JS -->
+                    </div>
+                    <div class="modal-actions">
+                        <button id="confirmDeleteBtn" class="btn-danger">
+                            Sim, Excluir Definitivamente
+                        </button>
+                        <button id="cancelDeleteBtn" class="btn-cancel">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="clients-section">
+                <h2 class="section-title">Clientes Cadastrados</h2>
+                <div class="table-container">
+                    <table id="clientesTable" class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Loja</th>
+                                <th>Razão Social</th>
+                                <th>Tipo</th>
+                                <th>Nome Fantasia</th>
+                                <th>Cidade</th>
+                                <th>Estado</th>
+                                <th>Telefone</th>
+                                <th>Ações</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

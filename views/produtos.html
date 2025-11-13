@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidons - Sistema de Produtos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <span class="navbar-title">Poseidons</span>
+            </div>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="index.html" class="navbar-link">
+                        Clientes
+                    </a>
+                </li>
+                <li class="navbar-item active">
+                    <a href="produtos.html" class="navbar-link">
+                        Produtos
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="pedidos.html" class="navbar-link">
+                        Pedidos
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Gestão de Produtos</h1>
+            <p>Sistema de Gerenciamento de Produtos</p>
+        </header>
+
+        <main class="main-content">
+            <button id="btnNovoProduto" class="btn-primary">
+                <span class="btn-icon">+</span>
+                Cadastrar Produto
+            </button>
+
+            <div id="overlay" class="overlay"></div>
+
+
+            <div id="formProduto" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Novo Produto</h2>
+                        <button class="close-btn" id="closeFormProduto">&times;</button>
+                    </div>
+                    <form id="produtoForm" class="form">
+                        <div class="form-section">
+                            <h3 class="section-heading">Informações Básicas</h3>
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Nome do Produto <span class="required">*</span></label>
+                                    <input type="text" name="nome" placeholder="Nome completo do produto" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Categoria <span class="required">*</span></label>
+                                    <input type="text" name="categoria" placeholder="Ex: Eletrônicos, Alimentos" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Código de Barras</label>
+                                    <input type="text" name="codigo_barras" placeholder="EAN-13 ou outro">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Descrição</label>
+                                    <input type="text" name="descricao" placeholder="Descrição detalhada do produto">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Preços e Estoque</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Preço de Custo <span class="required">*</span></label>
+                                    <input type="number" name="preco_custo" placeholder="0.00" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Preço de Venda <span class="required">*</span></label>
+                                    <input type="number" name="preco_venda" placeholder="0.00" step="0.01" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Quantidade em Estoque <span class="required">*</span></label>
+                                    <input type="number" name="estoque" placeholder="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Estoque Mínimo</label>
+                                    <input type="number" name="estoque_minimo" placeholder="0">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Detalhes Adicionais</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Unidade de Medida</label>
+                                    <input type="text" name="unidade" placeholder="Ex: UN, KG, LT">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Marca</label>
+                                    <input type="text" name="marca" placeholder="Fabricante ou marca">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Fornecedor</label>
+                                    <input type="text" name="fornecedor" placeholder="Nome do fornecedor">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-select">
+                                        <option value="ativo">Ativo</option>
+                                        <option value="inativo">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <p class="required-note">* Campos obrigatórios</p>
+                            <button type="submit" class="btn-submit">
+                                Cadastrar Produto
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modalViewProduto" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Detalhes do Produto</h2>
+                        <button class="close-btn" id="closeViewModal">&times;</button>
+                    </div>
+                    <div id="viewContent" class="view-content">
+                        <!-- Dados do produto -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEditProduto" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Editar Produto</h2>
+                        <button class="close-btn" id="closeEditModal">&times;</button>
+                    </div>
+                    <form id="editProdutoForm" class="form">
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Código:</label>
+                                    <input type="text" name="codigo" readonly class="readonly-field">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Informações Básicas</h3>
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Nome do Produto <span class="required">*</span></label>
+                                    <input type="text" name="nome" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Categoria <span class="required">*</span></label>
+                                    <input type="text" name="categoria" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Código de Barras</label>
+                                    <input type="text" name="codigo_barras">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Descrição</label>
+                                    <input type="text" name="descricao">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Preços e Estoque</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Preço de Custo <span class="required">*</span></label>
+                                    <input type="number" name="preco_custo" step="0.01" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Preço de Venda <span class="required">*</span></label>
+                                    <input type="number" name="preco_venda" step="0.01" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Quantidade em Estoque <span class="required">*</span></label>
+                                    <input type="number" name="estoque" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Estoque Mínimo</label>
+                                    <input type="number" name="estoque_minimo">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Detalhes Adicionais</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Unidade de Medida</label>
+                                    <input type="text" name="unidade">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Marca</label>
+                                    <input type="text" name="marca">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Fornecedor</label>
+                                    <input type="text" name="fornecedor">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-select">
+                                        <option value="ativo">Ativo</option>
+                                        <option value="inativo">Inativo</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <p class="required-note">* Campos obrigatórios</p>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-submit">
+                                    Atualizar Produto
+                                </button>
+                                <button type="button" class="btn-cancel-form">
+                                    Cancelar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modalConfirmDelete" class="modal">
+                <div class="modal-content modal-confirm">
+                    <div class="modal-header">
+                        <h2>Confirmar Exclusão</h2>
+                        <button class="close-btn" id="closeConfirmModal">&times;</button>
+                    </div>
+                    <div id="confirmContent" class="confirm-content">
+
+                    </div>
+                    <div class="modal-actions">
+                        <button id="confirmDeleteBtn" class="btn-danger">
+                            Sim, Excluir Definitivamente
+                        </button>
+                        <button id="cancelDeleteBtn" class="btn-cancel">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <section class="clients-section">
+                <h2 class="section-title">Produtos Cadastrados</h2>
+                <div class="table-container">
+                    <table id="produtosTable" class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Preço Venda</th>
+                                <th>Estoque</th>
+                                <th>Marca</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="produtos.js"></script>
+</body>
+</html>

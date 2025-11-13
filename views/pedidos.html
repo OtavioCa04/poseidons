@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poseidons - Sistema de Pedidos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <span class="navbar-title">Poseidons</span>
+            </div>
+            <ul class="navbar-menu">
+                <li class="navbar-item">
+                    <a href="index.html" class="navbar-link">
+                        Clientes
+                    </a>
+                </li>
+                <li class="navbar-item">
+                    <a href="produtos.html" class="navbar-link">
+                        Produtos
+                    </a>
+                </li>
+                <li class="navbar-item active">
+                    <a href="pedidos.html" class="navbar-link">
+                        Pedidos
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="header">
+            <h1>Gestão de Pedidos</h1>
+            <p>Sistema de Gerenciamento de Pedidos</p>
+        </header>
+
+        <main class="main-content">
+            <button id="btnNovoPedido" class="btn-primary">
+                <span class="btn-icon">+</span>
+                Novo Pedido
+            </button>
+
+            <div id="overlay" class="overlay"></div>
+
+            <div id="formPedido" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Novo Pedido</h2>
+                        <button class="close-btn" id="closeFormPedido">&times;</button>
+                    </div>
+                    <form id="pedidoForm" class="form">
+                        <div class="form-section">
+                            <h3 class="section-heading">Cliente</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Cliente <span class="required">*</span></label>
+                                    <select name="cliente_codigo" id="clienteSelect" required class="form-select">
+                                        <option value="">Selecione um cliente</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Data do Pedido <span class="required">*</span></label>
+                                    <input type="date" name="data_pedido" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Itens do Pedido</h3>
+                            <div id="itens-container">
+                                
+                            </div>
+                            <button type="button" id="btnAdicionarItem" class="btn-add-item">
+                                Adicionar Item
+                            </button>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Detalhes</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Status</label>
+                                    <select name="status" class="form-select">
+                                        <option value="pendente">Pendente</option>
+                                        <option value="processando">Processando</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Valor Total</label>
+                                    <input type="text" id="valorTotal" readonly class="readonly-field" value="R$ 0,00">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Observações</label>
+                                    <textarea name="observacoes" rows="3" class="form-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <p class="required-note">* Campos obrigatórios</p>
+                            <button type="submit" class="btn-submit">
+                                Cadastrar Pedido
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div id="modalViewPedido" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2>Detalhes do Pedido</h2>
+                        <button class="close-btn" id="closeViewModal">&times;</button>
+                    </div>
+                    <div id="viewContent" class="view-content">
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalConfirmDelete" class="modal">
+                <div class="modal-content modal-confirm">
+                    <div class="modal-header">
+                        <h2>Confirmar Exclusão</h2>
+                        <button class="close-btn" id="closeConfirmModal">&times;</button>
+                    </div>
+                    <div id="confirmContent" class="confirm-content">
+                    </div>
+                    <div class="modal-actions">
+                        <button id="confirmDeleteBtn" class="btn-danger">
+                            Sim, Excluir Definitivamente
+                        </button>
+                        <button id="cancelDeleteBtn" class="btn-cancel">
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="modalEditPedido" class="modal">
+                <div class="modal-content modal-large">
+                    <div class="modal-header">
+                        <h2>Editar Pedido</h2>
+                        <button class="close-btn" id="closeEditModal">&times;</button>
+                    </div>
+                    
+                    <form id="editPedidoForm" class="form">
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Código do Pedido:</label>
+                                    <input type="text" name="codigo" readonly class="readonly-field">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Cliente:</label>
+                                    <input type="text" name="cliente_nome" readonly class="readonly-field">
+                                </div>
+                            </div>
+                            <input type="hidden" name="cliente_codigo">
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Status do Pedido</h3>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label class="form-label">Alterar Status</label>
+                                    <select name="status" class="form-select" required>
+                                        <option value="pendente">Pendente</option>
+                                        <option value="processando">Processando</option>
+                                        <option value="concluido">Concluído</option>
+                                        <option value="cancelado">Cancelado</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Valor Total</label>
+                                    <input type="text" id="valorTotalEdit" readonly class="readonly-field" value="R$ 0,00">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section" id="secaoItens" style="display: none;">
+                            <h3 class="section-heading">Itens do Pedido</h3>
+                            <div class="alert" style="background: #fff3cd; border: 2px solid #856404; color: #856404; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
+                                ⚠️ <strong>Atenção:</strong> Ao alterar os itens, o estoque será recalculado automaticamente.
+                            </div>
+                            <div id="itensContainerEdit">
+                            </div>
+                            <button type="button" class="btn-add-item" onclick="adicionarItemEdit()">
+                                Adicionar Item
+                            </button>
+                        </div>
+
+                        <div class="form-section">
+                            <h3 class="section-heading">Observações</h3>
+                            <div class="form-row">
+                                <div class="form-group form-group-full">
+                                    <label class="form-label">Observações</label>
+                                    <textarea name="observacoes" rows="3" class="form-textarea"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn-submit">
+                                Atualizar Pedido
+                            </button>
+                            <button type="button" class="btn-cancel-form" onclick="fecharTodosModais()">
+                                Cancelar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <section class="clients-section">
+                <h2 class="section-title">Pedidos Cadastrados</h2>
+                <div class="table-container">
+                    <table id="pedidosTable" class="clients-table">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Data</th>
+                                <th>Status</th>
+                                <th>Valor Total</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="pedidos.js"></script>
+</body>
+</html>
