@@ -1,0 +1,243 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 1600" style="background-color: white;">
+  <defs>
+    <style>
+      .layer-box { fill: #f0f4f8; stroke: #2c5aa0; stroke-width: 2; }
+      .component-box { fill: #ffffff; stroke: #4a90e2; stroke-width: 1.5; }
+      .db-box { fill: #e8f5e9; stroke: #2e7d32; stroke-width: 2; }
+      .title-text { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #1a1a1a; }
+      .subtitle-text { font-family: Arial, sans-serif; font-size: 13px; fill: #333333; }
+      .small-text { font-family: Arial, sans-serif; font-size: 11px; fill: #555555; }
+      .layer-title { font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; fill: #2c5aa0; }
+      .arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .bi-arrow { stroke: #666; stroke-width: 2; fill: none; marker-end: url(#arrowhead); marker-start: url(#arrowhead-start); }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="#666"/>
+    </marker>
+    <marker id="arrowhead-start" markerWidth="10" markerHeight="10" refX="1" refY="3" orient="auto">
+      <polygon points="10 0, 0 3, 10 6" fill="#666"/>
+    </marker>
+  </defs>
+
+  <text x="700" y="30" text-anchor="middle" class="title-text" style="font-size: 24px; fill: #2c5aa0;">Diagrama de Arquitetura - Sistema Poseidons</text>
+  <text x="700" y="50" text-anchor="middle" class="subtitle-text">Node.js + Express + MySQL | Arquitetura em Camadas</text>
+
+  <rect x="50" y="80" width="1300" height="120" class="layer-box" rx="5"/>
+  <text x="70" y="105" class="layer-title">CAMADA 1: FRONTEND</text>
+  
+  <rect x="100" y="115" width="180" height="70" class="component-box" rx="3"/>
+  <text x="190" y="137" text-anchor="middle" class="subtitle-text" font-weight="bold">Views HTML</text>
+  <text x="190" y="155" text-anchor="middle" class="small-text">index.html</text>
+  <text x="190" y="170" text-anchor="middle" class="small-text">produtos.html</text>
+  <text x="190" y="185" text-anchor="middle" class="small-text">pedidos.html</text>
+
+  <rect x="310" y="115" width="180" height="70" class="component-box" rx="3"/>
+  <text x="400" y="137" text-anchor="middle" class="subtitle-text" font-weight="bold">JavaScript</text>
+  <text x="400" y="155" text-anchor="middle" class="small-text">script.js</text>
+  <text x="400" y="170" text-anchor="middle" class="small-text">produtos.js</text>
+  <text x="400" y="185" text-anchor="middle" class="small-text">pedidos.js</text>
+
+  <rect x="520" y="115" width="160" height="70" class="component-box" rx="3"/>
+  <text x="600" y="137" text-anchor="middle" class="subtitle-text" font-weight="bold">CSS</text>
+  <text x="600" y="160" text-anchor="middle" class="small-text">style.css</text>
+
+  <path d="M 700 200 L 700 240" class="bi-arrow"/>
+  <text x="720" y="220" class="small-text">HTTP/JSON</text>
+
+  <rect x="50" y="240" width="1300" height="100" class="layer-box" rx="5"/>
+  <text x="70" y="265" class="layer-title">CAMADA 2: EXPRESS SERVER</text>
+  
+  <rect x="250" y="275" width="200" height="50" class="component-box" rx="3"/>
+  <text x="350" y="295" text-anchor="middle" class="subtitle-text" font-weight="bold">server.js</text>
+  <text x="350" y="313" text-anchor="middle" class="small-text">Inicia servidor porta 3000</text>
+
+  <rect x="500" y="275" width="200" height="50" class="component-box" rx="3"/>
+  <text x="600" y="295" text-anchor="middle" class="subtitle-text" font-weight="bold">app.js</text>
+  <text x="600" y="313" text-anchor="middle" class="small-text">Middlewares + Rotas</text>
+
+  <rect x="750" y="275" width="200" height="50" class="component-box" rx="3"/>
+  <text x="850" y="295" text-anchor="middle" class="subtitle-text" font-weight="bold">errorHandler</text>
+  <text x="850" y="313" text-anchor="middle" class="small-text">Tratamento global</text>
+
+  <path d="M 700 340 L 700 380" class="arrow"/>
+
+  <rect x="50" y="380" width="1300" height="100" class="layer-box" rx="5"/>
+  <text x="70" y="405" class="layer-title">CAMADA 3: ROUTES (API)</text>
+  
+  <rect x="150" y="415" width="180" height="50" class="component-box" rx="3"/>
+  <text x="240" y="435" text-anchor="middle" class="subtitle-text" font-weight="bold">clientRoutes</text>
+  <text x="240" y="453" text-anchor="middle" class="small-text">GET/POST/PUT/DELETE</text>
+
+  <rect x="360" y="415" width="180" height="50" class="component-box" rx="3"/>
+  <text x="450" y="435" text-anchor="middle" class="subtitle-text" font-weight="bold">productRoutes</text>
+  <text x="450" y="453" text-anchor="middle" class="small-text">GET/POST/PUT/DELETE</text>
+
+  <rect x="570" y="415" width="180" height="50" class="component-box" rx="3"/>
+  <text x="660" y="435" text-anchor="middle" class="subtitle-text" font-weight="bold">orderRoutes</text>
+  <text x="660" y="453" text-anchor="middle" class="small-text">GET/POST/PUT/DELETE</text>
+
+  <rect x="780" y="415" width="180" height="50" class="component-box" rx="3"/>
+  <text x="870" y="435" text-anchor="middle" class="subtitle-text" font-weight="bold">index.js</text>
+  <text x="870" y="453" text-anchor="middle" class="small-text">Roteador Principal</text>
+
+  <path d="M 240 465 L 240 520" class="arrow"/>
+  <path d="M 450 465 L 450 520" class="arrow"/>
+  <path d="M 660 465 L 660 520" class="arrow"/>
+
+  <rect x="50" y="520" width="1300" height="100" class="layer-box" rx="5"/>
+  <text x="70" y="545" class="layer-title">CAMADA 4: CONTROLLERS</text>
+  
+  <rect x="150" y="555" width="180" height="50" class="component-box" rx="3"/>
+  <text x="240" y="570" text-anchor="middle" class="subtitle-text" font-weight="bold">clientController</text>
+  <text x="240" y="585" text-anchor="middle" class="small-text">list, get, create</text>
+  <text x="240" y="598" text-anchor="middle" class="small-text">update, delete</text>
+
+  <rect x="360" y="555" width="180" height="50" class="component-box" rx="3"/>
+  <text x="450" y="570" text-anchor="middle" class="subtitle-text" font-weight="bold">productController</text>
+  <text x="450" y="585" text-anchor="middle" class="small-text">list, get, create</text>
+  <text x="450" y="598" text-anchor="middle" class="small-text">update, delete</text>
+
+  <rect x="570" y="555" width="180" height="50" class="component-box" rx="3"/>
+  <text x="660" y="570" text-anchor="middle" class="subtitle-text" font-weight="bold">orderController</text>
+  <text x="660" y="585" text-anchor="middle" class="small-text">list, get, create</text>
+  <text x="660" y="598" text-anchor="middle" class="small-text">update, delete</text>
+
+  <path d="M 240 605 L 240 660" class="arrow"/>
+  <path d="M 450 605 L 450 660" class="arrow"/>
+  <path d="M 660 605 L 660 660" class="arrow"/>
+
+  <rect x="50" y="660" width="1300" height="120" class="layer-box" rx="5"/>
+  <text x="70" y="685" class="layer-title">CAMADA 5: SERVICES (Logica de Negocio)</text>
+  
+  <rect x="130" y="700" width="200" height="65" class="component-box" rx="3"/>
+  <text x="230" y="720" text-anchor="middle" class="subtitle-text" font-weight="bold">clientService</text>
+  <text x="230" y="737" text-anchor="middle" class="small-text">Validacoes</text>
+  <text x="230" y="750" text-anchor="middle" class="small-text">Geracao de codigos</text>
+  <text x="230" y="763" text-anchor="middle" class="small-text">Regras de negocio</text>
+
+  <rect x="360" y="700" width="200" height="65" class="component-box" rx="3"/>
+  <text x="460" y="720" text-anchor="middle" class="subtitle-text" font-weight="bold">productService</text>
+  <text x="460" y="737" text-anchor="middle" class="small-text">Validacoes</text>
+  <text x="460" y="750" text-anchor="middle" class="small-text">Geracao de codigos</text>
+  <text x="460" y="763" text-anchor="middle" class="small-text">Regras de negocio</text>
+
+  <rect x="590" y="700" width="200" height="65" class="component-box" rx="3"/>
+  <text x="690" y="720" text-anchor="middle" class="subtitle-text" font-weight="bold">orderService</text>
+  <text x="690" y="737" text-anchor="middle" class="small-text">Validacoes + Transacoes</text>
+  <text x="690" y="750" text-anchor="middle" class="small-text">Controle de estoque</text>
+  <text x="690" y="763" text-anchor="middle" class="small-text">Calculo valor total</text>
+
+  <rect x="820" y="700" width="180" height="65" class="component-box" rx="3"/>
+  <text x="910" y="720" text-anchor="middle" class="subtitle-text" font-weight="bold">codeGenerator</text>
+  <text x="910" y="745" text-anchor="middle" class="small-text">Geracao de codigos</text>
+  <text x="910" y="758" text-anchor="middle" class="small-text">sequenciais</text>
+
+  <path d="M 230 765 L 230 820" class="arrow"/>
+  <path d="M 460 765 L 460 820" class="arrow"/>
+  <path d="M 690 765 L 690 820" class="arrow"/>
+
+  <rect x="50" y="820" width="1300" height="120" class="layer-box" rx="5"/>
+  <text x="70" y="845" class="layer-title">CAMADA 6: REPOSITORIES (Acesso a Dados)</text>
+  
+  <rect x="130" y="860" width="200" height="65" class="component-box" rx="3"/>
+  <text x="230" y="880" text-anchor="middle" class="subtitle-text" font-weight="bold">clientRepository</text>
+  <text x="230" y="897" text-anchor="middle" class="small-text">findAll, findByCode</text>
+  <text x="230" y="910" text-anchor="middle" class="small-text">create, update, remove</text>
+
+  <rect x="360" y="860" width="200" height="65" class="component-box" rx="3"/>
+  <text x="460" y="880" text-anchor="middle" class="subtitle-text" font-weight="bold">productRepository</text>
+  <text x="460" y="897" text-anchor="middle" class="small-text">findAll, findByCode</text>
+  <text x="460" y="910" text-anchor="middle" class="small-text">create, update, remove</text>
+  <text x="460" y="923" text-anchor="middle" class="small-text">adjustStock</text>
+
+  <rect x="590" y="860" width="200" height="65" class="component-box" rx="3"/>
+  <text x="690" y="880" text-anchor="middle" class="subtitle-text" font-weight="bold">orderRepository</text>
+  <text x="690" y="897" text-anchor="middle" class="small-text">insertOrder, findItems</text>
+  <text x="690" y="910" text-anchor="middle" class="small-text">insertOrderItem</text>
+  <text x="690" y="923" text-anchor="middle" class="small-text">deleteItems</text>
+
+  <path d="M 230 925 L 230 980" class="arrow"/>
+  <path d="M 460 925 L 460 980" class="arrow"/>
+  <path d="M 690 925 L 690 980" class="arrow"/>
+
+  <rect x="50" y="980" width="1300" height="100" class="layer-box" rx="5"/>
+  <text x="70" y="1005" class="layer-title">CAMADA 7: MODELS (Entidades de Dominio)</text>
+  
+  <rect x="150" y="1015" width="180" height="50" class="component-box" rx="3"/>
+  <text x="240" y="1035" text-anchor="middle" class="subtitle-text" font-weight="bold">Client</text>
+  <text x="240" y="1053" text-anchor="middle" class="small-text">fromDB, toJSON</text>
+  <text x="240" y="1066" text-anchor="middle" class="small-text">toPersistence</text>
+
+  <rect x="360" y="1015" width="180" height="50" class="component-box" rx="3"/>
+  <text x="450" y="1035" text-anchor="middle" class="subtitle-text" font-weight="bold">Product</text>
+  <text x="450" y="1053" text-anchor="middle" class="small-text">fromDB, toJSON</text>
+  <text x="450" y="1066" text-anchor="middle" class="small-text">toPersistence</text>
+
+  <rect x="570" y="1015" width="160" height="50" class="component-box" rx="3"/>
+  <text x="650" y="1035" text-anchor="middle" class="subtitle-text" font-weight="bold">Order</text>
+  <text x="650" y="1053" text-anchor="middle" class="small-text">fromDB, toJSON</text>
+  <text x="650" y="1066" text-anchor="middle" class="small-text">withItems</text>
+
+  <rect x="760" y="1015" width="160" height="50" class="component-box" rx="3"/>
+  <text x="840" y="1035" text-anchor="middle" class="subtitle-text" font-weight="bold">OrderItem</text>
+  <text x="840" y="1053" text-anchor="middle" class="small-text">fromDB, toJSON</text>
+  <text x="840" y="1066" text-anchor="middle" class="small-text">toPersistence</text>
+
+  <path d="M 450 1080 L 450 1130" class="arrow"/>
+
+  <rect x="50" y="1130" width="1300" height="100" class="layer-box" rx="5"/>
+  <text x="70" y="1155" class="layer-title">CAMADA 8: CONFIGURACAO</text>
+  
+  <rect x="300" y="1165" width="250" height="50" class="component-box" rx="3"/>
+  <text x="425" y="1185" text-anchor="middle" class="subtitle-text" font-weight="bold">database.js</text>
+  <text x="425" y="1203" text-anchor="middle" class="small-text">MySQL Connection Pool (mysql2)</text>
+
+  <rect x="600" y="1165" width="250" height="50" class="component-box" rx="3"/>
+  <text x="725" y="1185" text-anchor="middle" class="subtitle-text" font-weight="bold">.env</text>
+  <text x="725" y="1203" text-anchor="middle" class="small-text">DB_HOST, DB_USER, DB_PASSWORD</text>
+
+  <path d="M 425 1230 L 425 1280" class="arrow"/>
+
+  <rect x="50" y="1280" width="1300" height="150" class="db-box" rx="5"/>
+  <text x="70" y="1305" class="layer-title" style="fill: #2e7d32;">CAMADA 9: BANCO DE DADOS (MySQL)</text>
+  
+  <rect x="150" y="1320" width="200" height="90" class="component-box" rx="3"/>
+  <text x="250" y="1340" text-anchor="middle" class="subtitle-text" font-weight="bold">Tabela: clientes</text>
+  <text x="250" y="1358" text-anchor="middle" class="small-text">id, codigo, loja</text>
+  <text x="250" y="1371" text-anchor="middle" class="small-text">razao, cnpj</text>
+  <text x="250" y="1384" text-anchor="middle" class="small-text">endereco, email</text>
+
+  <rect x="380" y="1320" width="200" height="90" class="component-box" rx="3"/>
+  <text x="480" y="1340" text-anchor="middle" class="subtitle-text" font-weight="bold">Tabela: produtos</text>
+  <text x="480" y="1358" text-anchor="middle" class="small-text">id, codigo, nome</text>
+  <text x="480" y="1371" text-anchor="middle" class="small-text">descricao, preco</text>
+  <text x="480" y="1384" text-anchor="middle" class="small-text">estoque, categoria</text>
+
+  <rect x="610" y="1320" width="200" height="90" class="component-box" rx="3"/>
+  <text x="710" y="1340" text-anchor="middle" class="subtitle-text" font-weight="bold">Tabela: pedidos</text>
+  <text x="710" y="1358" text-anchor="middle" class="small-text">id, codigo</text>
+  <text x="710" y="1371" text-anchor="middle" class="small-text">cliente_codigo</text>
+  <text x="710" y="1384" text-anchor="middle" class="small-text">data, status, valor</text>
+
+  <rect x="840" y="1320" width="200" height="90" class="component-box" rx="3"/>
+  <text x="940" y="1340" text-anchor="middle" class="subtitle-text" font-weight="bold">Tabela: pedidos_itens</text>
+  <text x="940" y="1358" text-anchor="middle" class="small-text">id, pedido_codigo</text>
+  <text x="940" y="1371" text-anchor="middle" class="small-text">produto_codigo</text>
+  <text x="940" y="1384" text-anchor="middle" class="small-text">quantidade, preco</text>
+
+  <rect x="50" y="1460" width="1300" height="120" style="fill: #fafafa; stroke: #ccc; stroke-width: 1;" rx="5"/>
+  <text x="70" y="1485" class="subtitle-text" font-weight="bold">Padroes de Arquitetura:</text>
+  <text x="90" y="1505" class="small-text">+ Layered Architecture (9 camadas)</text>
+  <text x="90" y="1520" class="small-text">+ Repository Pattern (abstracao de dados)</text>
+  <text x="90" y="1535" class="small-text">+ Service Layer Pattern (logica de negocio)</text>
+  <text x="90" y="1550" class="small-text">+ Domain Models (entidades ricas)</text>
+  <text x="90" y="1565" class="small-text">+ Error Handling Middleware</text>
+
+  <text x="550" y="1485" class="subtitle-text" font-weight="bold">Fluxo de Dados:</text>
+  <text x="570" y="1505" class="small-text">Request: Frontend &gt; Routes &gt; Controllers &gt; Services &gt; Repositories &gt; Models &gt; DB</text>
+  <text x="570" y="1520" class="small-text">Response: DB &gt; Models &gt; Repositories &gt; Services &gt; Controllers &gt; Frontend</text>
+  
+  <text x="550" y="1545" class="subtitle-text" font-weight="bold">Tecnologias:</text>
+  <text x="570" y="1565" class="small-text">Node.js - Express 5 - MySQL - mysql2/promise - dotenv</text>
+
+</svg>
