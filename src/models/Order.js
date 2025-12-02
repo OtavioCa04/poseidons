@@ -2,17 +2,8 @@ const OrderItem = require('./OrderItem');
 
 class Order {
   constructor({
-    codigo,
-    cliente_codigo,
-    cliente_nome,
-    data_pedido,
-    status = 'pendente',
-    valor_total = 0,
-    observacoes = null,
-    cliente_razao = null,
-    cidade = null,
-    estado = null,
-    itens = []
+    codigo, cliente_codigo, cliente_nome, data_pedido, status = 'pendente', valor_total = 0, observacoes = null, cliente_razao = null,
+    cidade = null, estado = null, itens = []
   }) {
     this.codigo = codigo;
     this.cliente_codigo = cliente_codigo;

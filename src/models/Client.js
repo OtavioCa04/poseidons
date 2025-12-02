@@ -1,25 +1,7 @@
 class Client {
   constructor({
-    codigo,
-    loja,
-    razao,
-    tipo,
-    nomefantasia,
-    finalidade,
-    cnpj,
-    cep,
-    pais,
-    estado,
-    codmunicipio,
-    cidade,
-    endereco,
-    bairro,
-    ddd,
-    telefone,
-    abertura,
-    contato,
-    email,
-    homepage = null
+    codigo, loja, razao, tipo, nomefantasia, finalidade, cnpj, cep, pais, estado, codmunicipio, cidade,
+    endereco, bairro, ddd, telefone, abertura, contato, email, homepage = null
   }) {
     this.codigo = codigo;
     this.loja = loja;

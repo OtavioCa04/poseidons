@@ -300,7 +300,6 @@ editClienteForm.addEventListener('submit', async (e) => {
     console.error('Erro na requisição de atualização:', error);
     alert('Erro ao atualizar cliente. Verifique sua conexão.');
   } finally {
-    // Restaurar botão
     botaoSubmit.innerHTML = textoOriginal;
     botaoSubmit.disabled = false;
   }

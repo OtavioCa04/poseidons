@@ -1,10 +1,6 @@
 class OrderItem {
   constructor({
-    pedido_codigo,
-    produto_codigo,
-    produto_nome,
-    quantidade,
-    preco_unitario,
+    pedido_codigo, produto_codigo, produto_nome, quantidade, preco_unitario,
     subtotal
   }) {
     this.pedido_codigo = pedido_codigo;

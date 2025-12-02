@@ -1,18 +1,7 @@
 class Product {
   constructor({
-    codigo,
-    nome,
-    categoria,
-    codigo_barras,
-    descricao,
-    preco_custo,
-    preco_venda,
-    estoque,
-    estoque_minimo,
-    unidade,
-    marca,
-    fornecedor,
-    status = 'ativo'
+    codigo, nome, categoria, codigo_barras, descricao, preco_custo, preco_venda,
+    estoque, estoque_minimo, unidade, marca, fornecedor, status = 'ativo'
   }) {
     this.codigo = codigo;
     this.nome = nome;
