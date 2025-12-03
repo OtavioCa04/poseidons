@@ -31,6 +31,7 @@
                 if (data.authenticated) {
                     adicionarBotaoLogout();
                     exibirNomeUsuario(data.user);
+                    aplicarPermissoes(data.user);
                 }
             }
         } catch (error) {
@@ -74,13 +75,86 @@
     function exibirNomeUsuario(user) {
         const navbar = document.querySelector('.navbar-brand');
         if (navbar && user && user.nome) {
-            const userSpan = document.createElement('span');
-            userSpan.style.fontSize = '0.9rem';
-            userSpan.style.opacity = '0.8';
-            userSpan.style.marginLeft = '15px';
-            userSpan.textContent = `Olá, ${user.nome.split(' ')[0]}`;
-            navbar.appendChild(userSpan);
+            const userInfo = document.createElement('div');
+            userInfo.style.display = 'flex';
+            userInfo.style.flexDirection = 'column';
+            userInfo.style.alignItems = 'flex-start';
+            userInfo.style.marginLeft = '15px';
+            userInfo.style.fontSize = '0.85rem';
+            
+            const nameSpan = document.createElement('span');
+            nameSpan.style.opacity = '0.9';
+            nameSpan.textContent = `Olá, ${user.nome.split(' ')[0]}`;
+            
+            const roleSpan = document.createElement('span');
+            roleSpan.style.opacity = '0.7';
+            roleSpan.style.fontSize = '0.75rem';
+            roleSpan.style.textTransform = 'capitalize';
+            
+            const roleLabels = {
+                'admin': 'Administrador',
+                'gerente': 'Gerente',
+                'funcionario': 'Funcionário'
+            };
+            roleSpan.textContent = roleLabels[user.role] || user.role;
+            
+            userInfo.appendChild(nameSpan);
+            userInfo.appendChild(roleSpan);
+            navbar.appendChild(userInfo);
         }
+    }
+    
+    function aplicarPermissoes(user) {
+        const role = user.role;
+        
+        const permissions = {
+            admin: ['*'],
+            gerente: ['clientes:*', 'produtos:*', 'pedidos:*'],
+            funcionario: ['clientes:read', 'produtos:read', 'pedidos:read', 'pedidos:create', 'pedidos:update']
+        };
+        
+        const userPermissions = permissions[role] || [];
+        
+        function hasPermission(action) {
+            if (userPermissions.includes('*')) return true;
+            const [resource, operation] = action.split(':');
+            return userPermissions.includes(action) || userPermissions.includes(`${resource}:*`);
+        }
+        
+        setTimeout(() => {
+            if (currentPage === 'index.html' && !hasPermission('clientes:create')) {
+                const btnNovo = document.getElementById('btnNovo');
+                if (btnNovo) btnNovo.style.display = 'none';
+            }
+            
+            if (currentPage === 'produtos.html' && !hasPermission('produtos:create')) {
+                const btnNovoProduto = document.getElementById('btnNovoProduto');
+                if (btnNovoProduto) btnNovoProduto.style.display = 'none';
+            }
+            
+            if (currentPage === 'pedidos.html' && !hasPermission('pedidos:create')) {
+                const btnNovoPedido = document.getElementById('btnNovoPedido');
+                if (btnNovoPedido) btnNovoPedido.style.display = 'none';
+            }
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                const selects = document.querySelectorAll('.action-select');
+                selects.forEach(select => {
+                    const options = select.querySelectorAll('option');
+                    options.forEach(option => {
+                        const value = option.value;
+                        const page = currentPage.replace('.html', '');
+                        
+                        if (value === 'atualizar' && !hasPermission(`${page}:update`)) {
+                            option.style.display = 'none';
+                        }
+                        if (value === 'excluir' && !hasPermission(`${page}:delete`)) {
+                            option.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }, 500);
     }
     
     const originalFetch = window.fetch;

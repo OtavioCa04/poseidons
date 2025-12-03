@@ -1,5 +1,6 @@
 const AppError = require('../errors/AppError');
 const productRepository = require('../repositories/productRepository');
+const orderRepository = require('../repositories/orderRepository');
 const { generateSequentialCode } = require('../utils/codeGenerator');
 const Product = require('../models/Product');
 
@@ -71,6 +72,15 @@ async function updateProduct(codigo, payload) {
 }
 
 async function deleteProduct(codigo) {
+  const hasOrders = await orderRepository.hasProductInOrders(codigo);
+  
+  if (hasOrders) {
+    throw new AppError(
+      'Não é possível excluir produto que possui pedidos vinculados',
+      400
+    );
+  }
+
   const affectedRows = await productRepository.remove(codigo);
   if (!affectedRows) {
     throw new AppError('Produto não encontrado', 404);

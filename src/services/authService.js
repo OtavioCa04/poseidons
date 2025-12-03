@@ -6,7 +6,7 @@ const { JWT_SECRET } = require('../middleware/authMiddleware');
 
 const SALT_ROUNDS = 10;
 
-async function register(nome, email, senha) {
+async function register(nome, email, senha, role = 'funcionario') {
   if (!nome || !email || !senha) {
     throw new AppError('Nome, email e senha são obrigatórios', 400);
   }
@@ -20,6 +20,11 @@ async function register(nome, email, senha) {
     throw new AppError('Senha deve ter no mínimo 6 caracteres', 400);
   }
 
+  const validRoles = ['admin', 'gerente', 'funcionario'];
+  if (!validRoles.includes(role)) {
+    throw new AppError('Tipo de usuário inválido', 400);
+  }
+
   const existingUser = await userRepository.findByEmail(email);
   if (existingUser) {
     throw new AppError('Email já cadastrado', 400);
@@ -30,13 +35,14 @@ async function register(nome, email, senha) {
   const userId = await userRepository.create({
     nome,
     email,
+    role,
     senha: senhaHash
   });
 
   const user = await userRepository.findById(userId);
 
   const token = jwt.sign(
-    { id: user.id, email: user.email, nome: user.nome },
+    { id: user.id, email: user.email, nome: user.nome, role: user.role },
     JWT_SECRET,
     { expiresIn: '7d' }
   );
@@ -63,7 +69,7 @@ async function login(email, senha) {
   }
 
   const token = jwt.sign(
-    { id: user.id, email: user.email, nome: user.nome },
+    { id: user.id, email: user.email, nome: user.nome, role: user.role },
     JWT_SECRET,
     { expiresIn: '7d' }
   );

@@ -106,6 +106,19 @@ async function findLastCode(connection) {
   return rows.length ? rows[0].codigo : null;
 }
 
+async function findByClientCode(clientCode) {
+  const [rows] = await pool.query('SELECT * FROM pedidos WHERE cliente_codigo = ?', [clientCode]);
+  return rows.map((row) => Order.fromDatabase(row));
+}
+
+async function hasProductInOrders(productCode) {
+  const [rows] = await pool.query(
+    'SELECT COUNT(*) as count FROM pedido_itens WHERE produto_codigo = ?',
+    [productCode]
+  );
+  return rows[0].count > 0;
+}
+
 module.exports = {
   findAll,
   findByCode,
@@ -115,5 +128,7 @@ module.exports = {
   deleteItemsByOrderCode,
   deleteOrder,
   updateOrder,
-  findLastCode
+  findLastCode,
+  findByClientCode,
+  hasProductInOrders
 };

@@ -1,5 +1,6 @@
 const AppError = require('../errors/AppError');
 const clientRepository = require('../repositories/clientRepository');
+const orderRepository = require('../repositories/orderRepository');
 const { generateSequentialCode } = require('../utils/codeGenerator');
 const Client = require('../models/Client');
 
@@ -57,6 +58,15 @@ async function updateClient(codigo, payload) {
 }
 
 async function deleteClient(codigo) {
+  const orders = await orderRepository.findByClientCode(codigo);
+  
+  if (orders.length > 0) {
+    throw new AppError(
+      'Não é possível excluir cliente com pedidos vinculados. Exclua os pedidos primeiro.',
+      400
+    );
+  }
+
   const affectedRows = await clientRepository.remove(codigo);
   if (!affectedRows) {
     throw new AppError('Cliente não encontrado', 404);

@@ -12,10 +12,10 @@ async function findById(id) {
 }
 
 async function create(userData) {
-  const { nome, email, senha } = userData;
+  const { nome, email, role, senha } = userData;
   const [result] = await pool.query(
-    'INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)',
-    [nome, email, senha]
+    'INSERT INTO usuarios (nome, email, role, senha) VALUES (?, ?, ?, ?)',
+    [nome, email, role || 'funcionario', senha]
   );
   return result.insertId;
 }
